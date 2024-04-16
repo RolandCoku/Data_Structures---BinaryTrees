@@ -76,20 +76,31 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
 
         return node;
     }
-    private BinaryNode<T> removeMin(BinaryNode<T> root){
-        if (root == null){
+    private BinaryNode<T> removeMin(BinaryNode<T> node){
+        if(node.getLeft() == null){
+            return node.getRight();
+        }
+        node.setLeft(this.removeMin(node.getLeft()));
+        return node;
+    }
+
+    private BinaryNode<T> remove(T element, BinaryNode<T> node){
+        if(node == null){
             return null;
         }
 
-        if(root.getLeft() != null){
-            root.setLeft(this.removeMin(root.getLeft()));
-            return root;
-        }else {
-            return root.getRight();
+        if(element.compareTo(node.getElement()) < 0){
+            node.setLeft(this.remove(element, node.getLeft()));
+        }else if(element.compareTo(node.getElement()) > 0){
+            node.setRight(this.remove(element, node.getRight()));
+        }else if(node.getLeft() != null && node.getRight() != null){
+            node.setElement(this.findMin(node.getRight()).getElement());
+            node.setRight(this.removeMin(node.getRight()));
+        }else{
+            node = (node.getLeft() != null) ? node.getLeft() : node.getRight();
         }
-    }
-    private BinaryNode<T> remove(T element, BinaryNode<T> startingNode){
-        return startingNode;
+
+            return node;
     }
 
 //**********************************************************************************************************************

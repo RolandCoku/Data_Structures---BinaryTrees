@@ -16,9 +16,18 @@ public class Main {
         System.out.println("Max: " + tree.findMax());
         System.out.println("Find 4: " + tree.find(4));
         System.out.println("Find 10: "+ tree.find(10));
+
         tree.removeMin();
         tree.printPreOrder();
         tree.removeMin();
+        tree.printPreOrder();
+        tree.removeMin();
+        tree.printPreOrder();
+        tree.removeMin();
+        tree.printPreOrder();
+        tree.remove(7);
+        tree.printPreOrder();
+        tree.remove(10);
         tree.printPreOrder();
 
     }

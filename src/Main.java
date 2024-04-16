@@ -30,5 +30,16 @@ public class Main {
         tree.remove(10);
         tree.printPreOrder();
 
+        BinaryTree<Integer> tree2 = new BinaryTree<>();
+        tree2.insert(8);
+        tree2.insert(3);
+        tree2.insert(6);
+        tree2.insert(10);
+        tree2.insert(4);
+        tree2.printPreOrder();
+        tree2.printEven();
+        System.out.println("Max: " + tree2.findMax());
+        System.out.println("Parent of 4: " + tree2.findParent(4).getElement());
+
     }
 }

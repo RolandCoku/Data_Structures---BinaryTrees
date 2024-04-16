@@ -44,6 +44,23 @@ public class BinaryTree<T extends Comparable<T>> {
     public void merge(T rootElement){
         BinaryTree<T> tree1;
         BinaryTree<T> tree2;
+        tree1 = new BinaryTree<>(rootElement);
+        tree2 = new BinaryTree<>(rootElement);
+        root = new BinaryNode<>(rootElement,tree1.root,tree2.root);
+    }
+    public void insert(T newElement){
+        root = insert(newElement,root);
+    }
+    private BinaryNode<T> insert(T newElement, BinaryNode<T> node){
+        if(node == null){
+            return new BinaryNode<>(newElement);
+        }
+        if(newElement.compareTo(node.getElement()) < 0){
+            node.setLeft(insert(newElement,node.getLeft()));
+        }else{
+            node.setRight(insert(newElement,node.getRight()));
+        }
+        return node;
     }
 
 //**********************************************************************************************************************
@@ -52,10 +69,75 @@ public class BinaryTree<T extends Comparable<T>> {
 //3. Ndertoni nje funksion gjen vleren me te madhe ne nje:
 //a. Peme binare
 
+    public T findMax(){
+        if(isEmpty()){
+            return null;
+        }
+        return findMax(root);
+    }
+
+    private T findMax(BinaryNode<T> node){
+        T max = node.getElement();
+        if(node.getLeft() != null){
+            T leftMax = findMax(node.getLeft());
+            max = (leftMax.compareTo(max) > 0) ? leftMax : max;
+        }
+        if(node.getRight() != null){
+            T rightMax = findMax(node.getRight());
+            max = (rightMax.compareTo(max) > 0) ? rightMax : max;
+        }
+        return max;
+    }
+
 //4. Ndertoni nje funksion qe printon te gjitha nyjet me vlere cift te nje peme binare.
+    public void printEven(){
+        if(isEmpty()){
+            System.out.println("Empty tree!");
+        }
+        System.out.print("Even elements: [ ");
+        printEven(root);
+        System.out.println("]");
+    }
+
+    private void printEven(BinaryNode<T> node){
+        if((Integer)node.getElement() % 2 == 0){
+            System.out.print(node.getElement() + " ");
+        }
+        if(node.getLeft() != null){
+            printEven(node.getLeft());
+        }
+        if(node.getRight() != null){
+            printEven(node.getRight());
+        }
+    }
 
 //5. Ndertoni nje funksion qe gjen prindin e nje elementi te dhene X ne nje:
 //a. Peme binare
+    public BinaryNode<T> findParent(T element){
+        if(isEmpty()){
+            System.out.println("Empty tree!");
+        }
+        return findParent(element,root);
+    }
+
+    private BinaryNode<T> findParent(T element, BinaryNode<T> node){
+        if(node.getLeft() != null && node.getLeft().getElement().equals(element)){
+            return node;
+        }
+        if(node.getRight() != null && node.getRight().getElement().equals(element)){
+            return node;
+        }
+
+        BinaryNode<T> parent = null;
+
+        if(node.getLeft() != null){
+            parent = findParent(element,node.getLeft());
+        }
+        if(parent == null && node.getRight() != null){
+            parent = findParent(element,node.getRight());
+        }
+        return parent;
+    }
 
 //6. Ndertoni funksione eficente qe marrin nje pointer ne rrenjen e nje peme binare, T dhe kthejne:
 //a. Numrin e nyjeve ne T

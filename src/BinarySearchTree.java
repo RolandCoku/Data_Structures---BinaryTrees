@@ -55,14 +55,6 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
         return this.findMin(node.getLeft());
     }
 
-    private BinaryNode<T> findMax(BinaryNode<T> node){
-        if(node.getRight() == null){
-            return node;
-        }
-
-        return this.findMax(node.getRight());
-    }
-
     private BinaryNode<T> insert(T element, BinaryNode<T> node){
         if(node == null){
             return new BinaryNode<>(element);
@@ -109,8 +101,17 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
 //3. Ndertoni nje funksion gjen vleren me te madhe ne nje:
 //b. Peme binare kerkimi
 
+    private BinaryNode<T> findMax(BinaryNode<T> node){
+        if(node.getRight() == null){
+            return node;
+        }
+
+        return this.findMax(node.getRight());
+    }
+
 //5. Ndertoni nje funksion qe gjen prindin e nje elementi te dhene X ne nje:
 //b. Peme binare kerkimi
+
 
 //18. Ndertoni nje funksion qe printon dhe numeron elementet e nje PBK qe jane me te medhenj se nje vlere e dhene k.
 

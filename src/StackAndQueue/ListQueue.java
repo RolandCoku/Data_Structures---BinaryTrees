@@ -1,6 +1,6 @@
 package StackAndQueue;
 
-import List.ListNode;
+import StackAndQueue.List.ListNode;
 public class ListQueue<T extends Comparable<T>> {
     private ListNode<T> front;
     private ListNode<T> back;

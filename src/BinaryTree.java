@@ -1,18 +1,22 @@
 public class BinaryTree<T extends Comparable<T>> {
-    private BinaryNode<T> root;
+    public BinaryNode<T> root;
+
     public BinaryTree(T rootElement){
         root = new BinaryNode<>(rootElement,null,null);
     }
     public BinaryTree(){
         root = null;
     }
-    public BinaryNode<T> getRoot(){
-        return root;
-    }
     public int size(){
+        if(isEmpty()){
+            return 0;
+        }
         return root.size();
     }
     public int height(){
+        if(isEmpty()){
+            return 0;
+        }
         return root.height();
     }
 

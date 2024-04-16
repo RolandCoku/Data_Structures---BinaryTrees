@@ -1,6 +1,6 @@
 package StackAndQueue;
 
-import List.DoublyListNode;
+import StackAndQueue.List.DoublyListNode;
 public class ListDoubleEndedQueue<T extends Comparable<T>> {
     private DoublyListNode<T> front;
     private DoublyListNode<T> back;

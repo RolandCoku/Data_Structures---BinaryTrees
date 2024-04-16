@@ -1,12 +1,15 @@
-public class BinarySearchTree<T extends Comparable<T>> {
-    private BinaryNode<T> root;
+public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
 
     public BinarySearchTree(){
-        root = null;
+        super();
+    }
+
+    public BinarySearchTree(T element){
+        super(element);
     }
 
     public void insert(T element){
-        root = insert(element,root);
+        super.root = insert(element,super.root);
     }
 
     public void remove(T element){
@@ -29,14 +32,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return elementAt(find(element,root));
     }
 
-    public void clear(){
-        root = null;
-    }
-
-    public boolean isEmpty(){
-        return root == null;
-    }
-
     private T elementAt(BinaryNode<T> node){
         if (node == null){
             return null;
@@ -44,41 +39,57 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return node.getElement();
     }
 
-    private BinaryNode<T> find(T element, BinaryNode<T> startingNode){
-        if (startingNode == null){
-            return null;
-        }
-
-        if(element.compareTo(startingNode.getElement()) < 0){
-            return find(element, startingNode.getLeft());
-        }else if(element.compareTo(startingNode.getElement()) > 0){
-            return find(element, startingNode.getRight());
+    private BinaryNode<T> find(T element, BinaryNode<T> node){
+        if(node.getElement().equals(element)){
+            return node;
+        }else if(element.compareTo(node.getElement()) < 0){
+            return this.find(element, node.getLeft());
         }else
-            return startingNode;
+            return this.find(element, node.getRight());
     }
 
-    private BinaryNode<T> findMin(BinaryNode<T> startingNode){
-        if (startingNode == null){
+    private BinaryNode<T> findMin(BinaryNode<T> node){
+        if(node.getLeft() == null){
+            return node;
+        }
+        return this.findMin(node.getLeft());
+    }
+
+    private BinaryNode<T> findMax(BinaryNode<T> node){
+        if(node.getRight() == null){
+            return node;
+        }
+
+        return this.findMax(node.getRight());
+    }
+
+    private BinaryNode<T> insert(T element, BinaryNode<T> node){
+        if(node == null){
+            return new BinaryNode<>(element);
+        }
+
+        if(element.compareTo(node.getElement()) < 0){
+            node.setLeft(this.insert(element, node.getLeft()));
+        }else if(element.compareTo(node.getElement()) > 0){
+            node.setRight(this.insert(element, node.getRight()));
+        }
+
+        return node;
+    }
+    private BinaryNode<T> removeMin(BinaryNode<T> root){
+        if (root == null){
             return null;
         }
-        if(startingNode.getLeft() != null){
-            return findMin(startingNode.getLeft());
+
+        if(root.getLeft() != null){
+            root.setLeft(this.removeMin(root.getLeft()));
+            return root;
+        }else {
+            return root.getRight();
         }
-        return startingNode;
-    }
-    private BinaryNode<T> findMax(BinaryNode<T> startingNode){
-        if(startingNode == null){
-
-        }
-    }
-    private BinaryNode<T> insert(T element, BinaryNode<T> startingNode){
-
-    }
-    private BinaryNode<T> removeMin(BinaryNode<T> startingNode){
-
     }
     private BinaryNode<T> remove(T element, BinaryNode<T> startingNode){
-
+        return startingNode;
     }
 
 //**********************************************************************************************************************

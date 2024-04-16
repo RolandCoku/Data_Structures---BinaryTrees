@@ -6,13 +6,13 @@ public class BreadthFirstOrder <T extends Comparable<T>> extends TreeIterator<T>
     public BreadthFirstOrder(BinaryTree<T> theTree){
         super(theTree);
         queue = new ArrayQueue<>();
-        queue.enqueue(super.theTree.getRoot());
+        queue.enqueue(super.theTree.root);
     }
     @Override
     public void first(){
         queue.clear();
-        if(super.theTree.getRoot() != null){
-            queue.enqueue(super.theTree.getRoot());
+        if(super.theTree.root != null){
+            queue.enqueue(super.theTree.root);
             this.advance();
         }
     }

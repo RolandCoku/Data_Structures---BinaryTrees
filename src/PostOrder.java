@@ -21,14 +21,14 @@ public class PostOrder<T extends Comparable<T>> extends TreeIterator<T> {
     public PostOrder(BinaryTree<T> theTree){
         super(theTree);
         stack = new ListStack<>();
-        stack.push(new StackNode<>(super.theTree.getRoot()));
+        stack.push(new StackNode<>(super.theTree.root));
     }
 
     @Override
     public void first(){
         this.stack.clear();
-        if(super.theTree.getRoot() != null){
-            stack.push(new StackNode<>(super.theTree.getRoot()));
+        if(super.theTree.root != null){
+            stack.push(new StackNode<>(super.theTree.root));
             this.advance();
         }
     }

@@ -1,6 +1,5 @@
 package StackAndQueue;
-
-import List.ListNode;
+import StackAndQueue.List.ListNode;
 public class ListStack<T extends Comparable<T>> {
     private ListNode<T> topOfStack;
 

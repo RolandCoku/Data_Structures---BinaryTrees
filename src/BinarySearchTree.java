@@ -40,7 +40,9 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
     }
 
     private BinaryNode<T> find(T element, BinaryNode<T> node){
-        if(node.getElement().equals(element)){
+        if(node == null){
+            return null;
+        }else if(node.getElement().equals(element)){
             return node;
         }else if(element.compareTo(node.getElement()) < 0){
             return this.find(element, node.getLeft());
@@ -111,9 +113,56 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T> {
 
 //5. Ndertoni nje funksion qe gjen prindin e nje elementi te dhene X ne nje:
 //b. Peme binare kerkimi
+    public BinaryNode<T> findParent(T element){
+        if(isEmpty()){
+            System.out.println("Empty Tree!");
+            return null;
+        }
+        BinaryNode<T> parent = findParent(element,root);
+        if(parent == null){
+            System.out.println("The given element is not on the tree!");
+            return null;
+        }
+        return parent;
+    }
+    private BinaryNode<T> findParent(T element, BinaryNode<T> node){
+        if(node == null){
+            return null;
+        }
 
+        if((node.getLeft() != null && node.getLeft().getElement().equals(element)) || (node.getRight() != null && node.getRight().getElement().equals(element))){
+            return node;
+        }
+
+        if (element.compareTo(node.getElement()) < 0){
+            return findParent(element,node.getLeft());
+        } else if(element.compareTo(node.getElement()) > 0){
+            return findParent(element, node.getRight());
+        } else
+            return null;
+    }
 
 //18. Ndertoni nje funksion qe printon dhe numeron elementet e nje PBK qe jane me te medhenj se nje vlere e dhene k.
 
+    public void printElementsGreaterThan(T element){
+        if(isEmpty()){
+            System.out.println("Empty Tree!");
+            return;
+        }
+        System.out.print("[ ");
+        printElementsGreaterThan(element,root);
+        System.out.println("]");
+    }
+    private void printElementsGreaterThan(T element, BinaryNode<T> root){
+        if(root == null){
+            return;
+        }
+
+        if(root.getElement().compareTo(element) > 0){
+            System.out.print(root.getElement() + " ");
+        }
+        printElementsGreaterThan(element,root.getLeft());
+        printElementsGreaterThan(element,root.getRight());
+    }
 
 }

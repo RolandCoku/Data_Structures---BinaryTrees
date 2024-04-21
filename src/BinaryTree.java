@@ -81,6 +81,9 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     private T findMax(BinaryNode<T> node){
+        if (node == null){
+            return null;
+        }
         T max = node.getElement();
         if(node.getLeft() != null){
             T leftMax = findMax(node.getLeft());
@@ -297,12 +300,10 @@ public class BinaryTree<T extends Comparable<T>> {
         if(root == null){
             return true;
         }
+        T leftMax = findMax(root.getLeft());
+        T rightMin = findMin(root.getRight());
 
-        if((root.getLeft() != null) && (root.getLeft().getElement().compareTo(root.getElement()) > 0)){
-            return false;
-        }
-
-        if((root.getRight() != null) && (root.getRight().getElement().compareTo(root.getElement()) < 0)){
+        if((root.getLeft() != null && leftMax.compareTo(root.getElement()) > 0) || (root.getRight() != null && rightMin.compareTo(root.getElement()) < 0)){
             return false;
         }
 
@@ -448,5 +449,27 @@ public class BinaryTree<T extends Comparable<T>> {
         newRoot.setLeft(mirror(root.getRight()));
         newRoot.setRight(mirror(root.getLeft()));
         return newRoot;
+    }
+
+    public T findMin(){
+        if(isEmpty()){
+            return null;
+        }
+        return findMin(root);
+    }
+    private T findMin(BinaryNode<T> node){
+        if(node == null){
+            return null;
+        }
+        T min = node.getElement();
+        if(node.getLeft() != null){
+            T leftMin = findMin(node.getLeft());
+            min = (leftMin.compareTo(min) < 0) ? leftMin : min;
+        }
+        if(node.getRight() != null){
+            T rightMin = findMin(node.getRight());
+            min = (rightMin.compareTo(min) < 0) ? rightMin : min;
+        }
+        return min;
     }
 }

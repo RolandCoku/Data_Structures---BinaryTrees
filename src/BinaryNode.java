@@ -91,7 +91,7 @@ public class BinaryNode<T extends Comparable<T>> {
 
     private int height(BinaryNode<T> root){
         if(root == null){
-            return 0;
+            return -1;
         }
         return 1+Math.max(height(root.left),height(root.right));
     }

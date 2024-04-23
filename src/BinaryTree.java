@@ -327,6 +327,10 @@ public class BinaryTree<T extends Comparable<T>> {
             return false;
         }
 
+        if((root.getLeft() == null) || (root.getRight() == null) && root.height() > 1){
+            return false;
+        }
+
         return isBalanced(root.getLeft()) && isBalanced(root.getRight());
     }
 
